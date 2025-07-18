@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin View</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .entry {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+    }
+    .entry h3 {
+      margin-bottom: 10px;
+      color: #444;
+    }
+    .no-data {
+      text-align: center;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>📊 Merchant Dashboard</h1>
+  <div class="section" id="bookingDataSection">
+    <h2>Merchant Bookings</h2>
+    <div id="bookingDataContainer"></div>
+  </div>
+
+  <script>
+    // Load and display booking data
+    const bookingData = JSON.parse(localStorage.getItem('booking')) || [];
+    const bookingContainer = document.getElementById('bookingDataContainer');
+
+    if (bookingData.length === 0) {
+      bookingContainer.innerHTML = "<p class='no-data'>No booking data found.</p>";
+    } else {
+      bookingData.forEach((booking, i) => {
+        bookingContainer.innerHTML += `
+          <div class="entry">
+            <h3>Booking ${i + 1}</h3>
+            <p><strong>Name:</strong> ${booking.name}</p>
+            <p><strong>Mobile:</strong> ${booking.mobile}</p>
+            <p><strong>Location:</strong> ${booking.location}</p>
+          </div>
+        `;
+      });
+    }
+  </script>
+
+</body>
+</html>
